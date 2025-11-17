@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Ayush Kafle</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Ayush<span>Dev</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link nav-cta active">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container contact-layout">
+        <div>
+          <h1>Contact</h1>
+          <p>
+            Want to talk about an opportunity, a project idea, or just say hi?
+            Feel free to reach out.
+          </p>
+
+          <ul class="list">
+            <li><strong>Email:</strong> <a href="mailto:ayushkafle03@gmail.com">ayushkafle03@gmail.com</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/Ayush-Kafle" target="_blank">github.com/Ayush-Kafle</a></li>
+            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ayushkafle7107" target="_blank">linkedin.com/in/ayushkafle7107</a></li>
+          </ul>
+        </div>
+
+        <form class="card contact-form">
+          <h2>Send a message</h2>
+          <!-- This is just UI; if you want real emails later, we can hook it to a backend or service -->
+          <label>
+            Name
+            <input type="text" placeholder="Your name" required />
+          </label>
+
+          <label>
+            Email
+            <input type="email" placeholder="your@email.com" required />
+          </label>
+
+          <label>
+            Message
+            <textarea rows="5" placeholder="Write your message here..." required></textarea>
+          </label>
+
+          <button type="submit" class="btn primary" disabled>
+            Send (coming soon)
+          </button>
+          <p class="muted">
+            This form is a placeholder for now. You can contact me directly via email or LinkedIn above.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Ayush Kafle. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://github.com/Ayush-Kafle" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/ayushkafle7107" target="_blank">LinkedIn</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
