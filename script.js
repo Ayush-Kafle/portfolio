@@ -1,140 +1,164 @@
 // smooth scroll
 
-document.querySelectorAll('.sidebar-nav a').forEach(anchor=>{
+document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
 
-anchor.addEventListener('click',function(e){
+    anchor.addEventListener('click', function (e) {
 
-e.preventDefault();
+        e.preventDefault();
 
-document.querySelector(this.getAttribute('href'))
-.scrollIntoView({behavior:'smooth'});
+        document
+            .querySelector(this.getAttribute('href'))
+            .scrollIntoView({
+                behavior: 'smooth'
+            });
 
-});
+    });
 
 });
 
 
 // scroll spy
 
-const sections=document.querySelectorAll('section');
-const navLinks=document.querySelectorAll('.sidebar-nav a');
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
 
-window.addEventListener('scroll',()=>{
+window.addEventListener('scroll', () => {
 
-let current='';
+    let current = '';
 
-sections.forEach(section=>{
+    sections.forEach(section => {
 
-const sectionTop=section.offsetTop-120;
+        const sectionTop = section.offsetTop - 120;
 
-if(window.scrollY>=sectionTop){
-current=section.getAttribute('id');
-}
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+        }
 
-});
+    });
 
-navLinks.forEach(link=>{
+    navLinks.forEach(link => {
 
-link.classList.remove('active');
+        link.classList.remove('active');
 
-if(link.getAttribute('href')===`#${current}`){
-link.classList.add('active');
-}
+        if (link.getAttribute('href') === `#${current}`) {
 
-});
+            link.classList.add('active');
+
+            // move indicator while scrolling
+            moveIndicator(link);
+
+        }
+
+    });
 
 });
 
 
 // sliding nav indicator
 
-const indicator=document.querySelector('.nav-indicator');
+const indicator = document.querySelector('.nav-indicator');
 
-function moveIndicator(link){
+function moveIndicator(link) {
 
-const rect=link.getBoundingClientRect();
-const navRect=link.parentElement.getBoundingClientRect();
+    const rect = link.getBoundingClientRect();
+    const navRect = link.parentElement.getBoundingClientRect();
 
-indicator.style.transform=
-`translateY(${rect.top-navRect.top+rect.height/2}px)`;
+    indicator.style.transform =
+        `translateY(${rect.top - navRect.top + rect.height / 2}px)`;
 
 }
 
-navLinks.forEach(link=>{
-link.addEventListener('click',()=>moveIndicator(link));
+navLinks.forEach(link => {
+
+    link.addEventListener('click', () => {
+        moveIndicator(link);
+    });
+
+});
+
+
+// set indicator position on page load
+
+window.addEventListener('load', () => {
+
+    const activeLink =
+        document.querySelector('.sidebar-nav a.active') || navLinks[0];
+
+    moveIndicator(activeLink);
+
 });
 
 
 // reveal animation
 
-const revealSections=document.querySelectorAll('.section');
+const revealSections = document.querySelectorAll('.section');
 
-const observer=new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries => {
 
-entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-if(!entry.isIntersecting)return;
+        if (!entry.isIntersecting) return;
 
-entry.target.classList.add('reveal');
+        entry.target.classList.add('reveal');
 
+    });
+
+}, {
+    threshold: .2
 });
 
-},{threshold:.2});
-
-revealSections.forEach(section=>observer.observe(section));
+revealSections.forEach(section => observer.observe(section));
 
 
 // cursor glow
 
-const glow=document.querySelector('.cursor-glow');
+const glow = document.querySelector('.cursor-glow');
 
-document.addEventListener('mousemove',e=>{
+document.addEventListener('mousemove', e => {
 
-glow.style.left=e.clientX+"px";
-glow.style.top=e.clientY+"px";
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
 
 });
 
 
 // terminal typing
 
-const lines=[
-"Backend Engineer",
-"Building scalable systems",
-"API design • System architecture",
-"Open to opportunities"
+const lines = [
+    "Backend Engineer",
+    "Building scalable systems",
+    "API design • System architecture",
+    "Open to opportunities"
 ];
 
-let lineIndex=0;
-let charIndex=0;
+let lineIndex = 0;
+let charIndex = 0;
 
-const terminal=document.getElementById("terminal-text");
+const terminal = document.getElementById("terminal-text");
 
-function typeLine(){
+function typeLine() {
 
-if(charIndex<lines[lineIndex].length){
+    if (charIndex < lines[lineIndex].length) {
 
-terminal.textContent+=lines[lineIndex].charAt(charIndex);
+        terminal.textContent += lines[lineIndex].charAt(charIndex);
 
-charIndex++;
+        charIndex++;
 
-setTimeout(typeLine,60);
+        setTimeout(typeLine, 60);
 
-}
+    } else {
 
-else{
+        setTimeout(() => {
 
-setTimeout(()=>{
+            terminal.textContent = "";
+            charIndex = 0;
+            lineIndex = (lineIndex + 1) % lines.length;
 
-terminal.textContent="";
-charIndex=0;
-lineIndex=(lineIndex+1)%lines.length;
+            typeLine();
 
-typeLine();
+        }, 1800);
 
-},1800);
-
-}
+    }
 
 }
 
@@ -143,30 +167,31 @@ typeLine();
 
 // project hover
 
-const projects=document.querySelectorAll('.project');
+const projects = document.querySelectorAll('.project');
 
-projects.forEach(project=>{
+projects.forEach(project => {
 
-project.addEventListener('mousemove',e=>{
+    project.addEventListener('mousemove', e => {
 
-const rect=project.getBoundingClientRect();
+        const rect = project.getBoundingClientRect();
 
-const x=e.clientX-rect.left;
-const y=e.clientY-rect.top;
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-const centerX=rect.width/2;
-const centerY=rect.height/2;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-const moveX=(x-centerX)/15;
-const moveY=(y-centerY)/15;
+        const moveX = (x - centerX) / 15;
+        const moveY = (y - centerY) / 15;
 
-project.style.transform=`translate(${moveX}px,${moveY}px)`;
+        project.style.transform =
+            `translate(${moveX}px,${moveY}px)`;
 
-});
+    });
 
-project.addEventListener('mouseleave',()=>{
-project.style.transform="translate(0,0)";
-});
+    project.addEventListener('mouseleave', () => {
+        project.style.transform = "translate(0,0)";
+    });
 
 });
 
