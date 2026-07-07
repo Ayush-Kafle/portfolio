@@ -412,3 +412,30 @@ color:#64748b;
 .project-links a:hover{
     color:#3b82f6;
 }
+
+/* ---------- Project Links ---------- */
+
+.project-links{
+
+    display:flex;
+    gap:20px;
+    margin-top:16px;
+
+}
+
+.project-links a{
+
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:.92rem;
+    font-weight:500;
+    transition:.25s ease;
+
+}
+
+.project-links a:hover{
+
+    color:#3b82f6;
+    transform:translateY(-2px);
+
+}
