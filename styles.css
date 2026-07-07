@@ -385,3 +385,30 @@ color:#3b82f6;
 color:#64748b;
 
 }
+
+.project h3 a{
+    color:#e2e8f0;
+    text-decoration:none;
+    transition:.25s;
+}
+
+.project h3 a:hover{
+    color:#3b82f6;
+}
+
+.project-links{
+    display:flex;
+    gap:20px;
+    margin-top:15px;
+}
+
+.project-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:.9rem;
+    transition:.25s;
+}
+
+.project-links a:hover{
+    color:#3b82f6;
+}
