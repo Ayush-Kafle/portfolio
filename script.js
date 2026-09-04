@@ -1,5 +1,68 @@
 // smooth scroll
 
+const themeToggle = document.querySelector('.theme-toggle');
+const themeLabel = themeToggle.querySelector('span');
+
+const themePalettes = {
+    dark: [
+        ['#020617', '#0a1024', '#19132d'],
+        ['#03101f', '#111a35', '#24152f'],
+        ['#020a18', '#0b1d2b', '#122b2b'],
+        ['#07101f', '#17182f', '#201c38']
+    ],
+    light: [
+        ['#faf8f1', '#f4f0f2', '#dfe5f1'],
+        ['#fbf8ef', '#f0f3ee', '#dce9e5'],
+        ['#fcf7ef', '#f5eeee', '#e8e3f1'],
+        ['#f7f7f2', '#eef2f3', '#dfe8ed']
+    ]
+};
+
+let paletteStep = -1;
+let paletteIndex = -1;
+
+function applyRandomPalette(force = false) {
+    const sections = document.querySelectorAll('section');
+    let nextStep = 0;
+
+    sections.forEach((section, index) => {
+        if (window.scrollY >= section.offsetTop - window.innerHeight * .35) {
+            nextStep = index;
+        }
+    });
+
+    if (!force && nextStep === paletteStep) return;
+
+    const mode = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+    const palettes = themePalettes[mode];
+    let nextIndex = Math.floor(Math.random() * palettes.length);
+
+    if (palettes.length > 1 && nextIndex === paletteIndex) {
+        nextIndex = (nextIndex + 1) % palettes.length;
+    }
+
+    const [top, middle, bottom] = palettes[nextIndex];
+    const root = document.documentElement;
+
+    root.style.setProperty('--theme-top', top);
+    root.style.setProperty('--theme-mid', middle);
+    root.style.setProperty('--theme-bottom', bottom);
+
+    paletteStep = nextStep;
+    paletteIndex = nextIndex;
+}
+
+applyRandomPalette(true);
+
+themeToggle.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-theme');
+
+    themeToggle.setAttribute('aria-pressed', String(isLight));
+    themeLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
+    paletteIndex = -1;
+    applyRandomPalette(true);
+});
+
 document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
 
     anchor.addEventListener('click', function (e) {
@@ -23,6 +86,8 @@ const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.sidebar-nav a');
 
 window.addEventListener('scroll', () => {
+
+    applyRandomPalette();
 
     let current = '';
 
