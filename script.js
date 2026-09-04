@@ -125,10 +125,10 @@ document.addEventListener('mousemove', e => {
 // terminal typing
 
 const lines = [
-    "Backend Engineer",
-    "Building scalable systems",
-    "API design • System architecture",
-    "Open to opportunities"
+    "backend systems",
+    "APIs & infrastructure",
+    "AI-powered software",
+    "always learning"
 ];
 
 let lineIndex = 0;
